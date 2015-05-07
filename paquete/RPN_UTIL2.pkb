@@ -498,7 +498,12 @@ CREATE OR REPLACE package body SYSTEM.rpn_util2 is
       raise_application_error(-20100, error_message);
   end;
 
-
+/*
+En el compilador es donde se realizaron las modificaciones,
+cuando son variables (caso T_IDENT) se reemmplaza y llama recursivamente al metodo que parsea
+cuando son funciones, va  y trae las funciones en la base de datos y con base a eso ejecuta la funcion
+en el esquema
+*/
   function compile (p_expr in varchar2, p_options in number default VALIDATE)
   return st_array deterministic
   is
@@ -570,8 +575,6 @@ CREATE OR REPLACE package body SYSTEM.rpn_util2 is
            st.push(token);
 
         when token.type = T_IDENT then
-        dbms_output.put_line('entro a T_IDENT');
-      
         query_vars :='SELECT * FROM JO_VARIABLES WHERE NOMBRE like '''||token.strval||'''';
         EXECUTE IMMEDIATE (query_vars) BULK COLLECT INTO MI_VAR; 
         FOR i IN MI_VAR.FIRST .. MI_VAR.LAST LOOP
@@ -586,16 +589,12 @@ CREATE OR REPLACE package body SYSTEM.rpn_util2 is
             ELSE
                 tmp_exp:='('||MI_VAR(I).expression||')';
                 initial_expression:=  REPLACE(initial_expression,MI_VAR(I).nombre,tmp_exp);
-                  
-                  --initial_expression:=  REPLACE(initial_expression,MI_VAR(I).nombre,MI_VAR(I).expression);
-                  
-                  return compile(initial_expression);
+                return compile(initial_expression);
             END IF;
         END LOOP;
         
             
         when token.type = T_FUNC then
-        dbms_output.put_line('entro a func');
            if fnc(token.strval) = 0 then
              output.push(token);
            else
@@ -603,19 +602,9 @@ CREATE OR REPLACE package body SYSTEM.rpn_util2 is
            end if;
 
         when token.type = T_LEFT then
-        dbms_output.put_line('entro a T_LEFT');
-      
-        --dbms_output.put_line(token.strval||' case T_LEFT'); 
-        
-
            st.push(token);
 
         when token.type = T_RIGHT then
-        dbms_output.put_line('entro a T_RIGHT');
-      
-        --put_line(token.strval||' case T_RIGHT'); 
-        
-
           loop
             if st.isEmpty then
                pos := token.position;

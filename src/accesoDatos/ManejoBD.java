@@ -1,17 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ Maneja objetos en la base de datos
+*/
 
 package accesoDatos;
-
-/**
- *
- * @author juan
- */
- 
- 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -27,7 +18,10 @@ public class ManejoBD {
     public ManejoBD(){
         fachada= new accesoDatos();
     }
-    
+ /*
+    Crea la funcion en la base de datos con base a los 
+    valores igresados, se debe hacer que simmplemente ejecute el create desde el input
+    */   
     public int crearFuncion(Funcion funcion)
     { 
         try {
@@ -95,11 +89,11 @@ public class ManejoBD {
         }
         return 0;
     }
+    /*
+        compila y evalua la expresion, llamando al paquete  rpn2    
+    */   
+ 
     public String runEval(String expression){
-        /*select rpn_util.eval(
-            rpn_util.parse('(3*A) * (2*B - 2*D)*3+F')
-        ) as result
-   from dual;*/
         LinkedList<String[]> total_result=new LinkedList();
         String query="select rpn_util2.eval(rpn_util2.compile('";
         query+=expression;
@@ -120,6 +114,9 @@ public class ManejoBD {
         }     
         return "";
     }
+    /*
+        devuelve las variables de la base de datos
+    */
     public LinkedList<String[]>getVariables(int top){
         LinkedList<String[]> total_result=new LinkedList();
        String query="SELECT * FROM jo_variables ORDER BY nombre";
