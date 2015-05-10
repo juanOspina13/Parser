@@ -111,7 +111,9 @@ public class ManejoBD {
                 return result[0];
             }
         }catch(Exception e){
-        }     
+            System.out.println("error en la expresion de la variable o funcion");
+        }
+        
         return "";
     }
     /*
