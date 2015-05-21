@@ -13,27 +13,28 @@ import java.util.LinkedList;
  * @author juan
  */
 public class Funcion {
-    String nombre;
-    String sintaxis;
-    String ayuda;
-    String expresion;
-    String type_return;
+    String sbNombre;
+    String sbSintaxis;
+    String sbAyuda;
+    String sbExpresion;
+    String sbType_return;
     LinkedList <Dato> datos;
 
-    public Funcion(String nombre, String sintaxis, String ayuda, String expresion, String type_return, LinkedList<Dato> datos) {
-        this.nombre = nombre;
-        System.out.println("nombre=>"+nombre);
-        this.sintaxis = sintaxis;
-        System.out.println("sintaxis=>"+sintaxis);
+    public Funcion(String isbNombre, String isbSintaxis, String isbAyuda, String isbExpresion, String isbType_return, LinkedList<Dato> datos) {
+        this.sbNombre = isbNombre;
+        System.out.println("nombre=>"+sbNombre);
         
-        this.ayuda = ayuda;
-        System.out.println("ayuda=>"+ayuda);
+        this.sbSintaxis = isbSintaxis;
+        System.out.println("sintaxis=>"+sbSintaxis);
         
-        this.expresion = expresion;
-        System.out.println("expresion=>"+expresion);
+        this.sbAyuda = isbAyuda;
+        System.out.println("ayuda=>"+sbAyuda);
         
-        this.type_return = type_return;
-        System.out.println("type_return=>"+type_return);
+        this.expresion = isbExpresion;
+        System.out.println("expresion=>"+sbExpresion);
+        
+        this.sbType_return = isbType_return;
+        System.out.println("type_return=>"+sbType_return);
         
         this.datos = datos;
         System.out.println("datos=>"+datos);
@@ -41,23 +42,23 @@ public class Funcion {
     }
 
     public String getNombre() {
-        return nombre;
+        return sbNombre;
     }
 
     public String getSintaxis() {
-        return sintaxis;
+        return sbSintaxis;
     }
 
     public String getAyuda() {
-        return ayuda;
+        return sbAyuda;
     }
 
     public String getExpresion() {
-        return expresion;
+        return sbExpresion;
     }
 
     public String getType_return() {
-        return type_return;
+        return sbType_return;
     }
 
     public LinkedList<Dato> getDatos() {

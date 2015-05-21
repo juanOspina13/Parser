@@ -11,26 +11,26 @@ package modelo;
  * @author juan
  */
 public class Dato {
-    String nombre;
-    String tipo;
+    String sbNombre;
+    String sbTipo;
 
     public Dato() {
         }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String isbNombre) {
+        this.sbNombre = isbNombre;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipo(String isbTipo) {
+        this.sbTipo = isbTipo;
     }
 
     public String getNombre() {
-        return nombre;
+        return sbNombre;
     }
 
     public String getTipo() {
-        return tipo;
+        return sbTipo;
     }
      
     
